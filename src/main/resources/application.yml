@@ -1,0 +1,25 @@
+spring.shell.interactive.enabled: false
+spring.config.import: file:env.properties
+riot.api-key: ${API_KEY_RIOT}
+
+ssh:
+  shell:
+    password: pass
+    host-key-file: ${java.io.tmpdir}/hostKey.ser
+    commands:
+      jmx:
+        create: false
+      script:
+        create: false
+      history:
+        create: false
+      postprocessors:
+        create: false
+      manage-sessions:
+        create: false
+      system:
+        create: false
+
+logging:
+  level:
+    com.github.fonimus: debug
