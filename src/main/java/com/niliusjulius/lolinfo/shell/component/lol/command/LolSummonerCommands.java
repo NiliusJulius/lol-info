@@ -28,14 +28,7 @@ public class LolSummonerCommands {
         try {
             summoner = lolSummoner.retrieveSummoner(serverName, summonerName);
         } catch (ConstraintViolationException ce) {
-            StringBuilder message = new StringBuilder();
-            ce.getConstraintViolations().forEach(cv -> {
-                if (!message.isEmpty()) {
-                    message.append(System.getProperty("line.separator"));
-                }
-                message.append(helper.getError(cv.getMessage()));
-            });
-            return message.toString();
+            return handleConstraintViolations(ce);
         }
 
         if (summoner == null) {
@@ -43,5 +36,33 @@ public class LolSummonerCommands {
         } else {
             return Messages.getMessage("summoner.has.level", summoner.getName(), summoner.getSummonerLevel());
         }
+    }
+
+    @ShellMethod(key = "get-mastery-score", value = "retrieve a Summoner's mastery score")
+    public String getSummonerMasteryScore(@ShellOption(value = "server") String serverName, @ShellOption(value = "name") String summonerName) {
+
+        Summoner summoner;
+        try {
+            summoner = lolSummoner.retrieveSummoner(serverName, summonerName);
+        } catch (ConstraintViolationException ce) {
+            return handleConstraintViolations(ce);
+        }
+
+        if (summoner == null) {
+            return helper.getError(Messages.getMessage("summoner.not.found", summonerName));
+        } else {
+            return Messages.getMessage("summoner.has.mastery.score", summoner.getName(), summoner.getMasteryScore());
+        }
+    }
+
+    private String handleConstraintViolations(ConstraintViolationException ce) {
+        StringBuilder message = new StringBuilder();
+        ce.getConstraintViolations().forEach(cv -> {
+            if (!message.isEmpty()) {
+                message.append(System.getProperty("line.separator"));
+            }
+            message.append(helper.getError(cv.getMessage()));
+        });
+        return message.toString();
     }
 }
