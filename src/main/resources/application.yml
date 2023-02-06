@@ -4,7 +4,10 @@ riot.api-key: ${API_KEY_RIOT}
 
 ssh:
   shell:
-    password: pass
+    user: ${SHELL_USER}
+    password: ${SHELL_PASSWORD}
+    host: ${SHELL_HOST}
+    port: ${SHELL_PORT}
     host-key-file: ${java.io.tmpdir}/hostKey.ser
     commands:
       jmx:
