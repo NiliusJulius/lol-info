@@ -45,8 +45,8 @@ dependencies {
 	implementation("com.github.stelar7:R4J:2.2.9")
 	// SSH Shell
 	implementation("com.github.fonimus:ssh-shell-spring-boot-starter:2.0.3")
-	implementation("org.fusesource.jansi:jansi:2.4.0")
-	implementation("org.jline:jline-terminal-jansi:3.22.0")
+	implementation("net.java.dev.jna:jna:5.13.0")
+	implementation("org.jline:jline-terminal-jna:3.22.0")
 	implementation("ch.qos.logback:logback-classic:1.4.5")
 	implementation("javax.annotation:javax.annotation-api:1.3.2")
 
