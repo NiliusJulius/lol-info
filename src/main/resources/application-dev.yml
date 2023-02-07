@@ -1,0 +1,9 @@
+ssh:
+  shell:
+    commands:
+      stacktrace:
+        create: true
+
+logging:
+  level:
+    com.github.fonimus: debug

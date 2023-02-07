@@ -1,6 +1,21 @@
-spring.shell.interactive.enabled: false
+spring.profiles.active: prod
+
 spring.config.import: file:env.properties
 riot.api-key: ${API_KEY_RIOT}
+
+spring:
+  shell:
+    interactive:
+      enabled: false
+    command:
+      stacktrace:
+        enabled: false
+      script:
+        enabled : false
+      history:
+        enabled: false
+      version:
+        enabled: false
 
 ssh:
   shell:
@@ -22,7 +37,9 @@ ssh:
         create: false
       system:
         create: false
+      stacktrace:
+        create: false
 
 logging:
   level:
-    com.github.fonimus: debug
+    com.github.fonimus: info
