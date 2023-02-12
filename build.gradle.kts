@@ -57,6 +57,7 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("com.google.jimfs:jimfs:1.2")
 
 	testIntegrationImplementation("org.springframework.boot:spring-boot-starter-test")
 }
