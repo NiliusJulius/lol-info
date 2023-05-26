@@ -1,5 +1,6 @@
 package com.niliusjulius.lolinfo.riot.lol.component;
 
+import com.niliusjulius.lolinfo.riot.lol.service.LolSummonerService;
 import no.stelar7.api.r4j.basic.constants.api.regions.LeagueShard;
 import no.stelar7.api.r4j.impl.lol.builders.summoner.SummonerBuilder;
 import no.stelar7.api.r4j.pojo.lol.summoner.Summoner;
@@ -15,12 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class LolSummonerTest {
+public class LolSummonerServiceTest {
     @Mock
     private SummonerBuilder summonerBuilder;
 
     @InjectMocks
-    private LolSummoner lolSummoner;
+    private LolSummonerService lolSummonerService;
 
     @Nested
     @DisplayName("RetrieveSummoner should")
@@ -37,7 +38,7 @@ public class LolSummonerTest {
             String leagueShardName = LeagueShard.EUW1.name();
             String summonerName = "TestSummonerName";
 
-            lolSummoner.retrieveSummoner(leagueShardName, summonerName);
+            lolSummonerService.retrieveSummoner(leagueShardName, summonerName);
 
             verify(summonerBuilder, times(1)).withPlatform(leagueShard);
             verify(summonerBuilder, times(1)).withName(summonerName);
@@ -54,7 +55,7 @@ public class LolSummonerTest {
             String leagueShardName = LeagueShard.EUW1.name();
             String summonerName = "TestSummonerName";
 
-            Summoner summoner = lolSummoner.retrieveSummoner(leagueShardName, summonerName);
+            Summoner summoner = lolSummonerService.retrieveSummoner(leagueShardName, summonerName);
 
             assertNull(summoner);
             verify(summonerBuilder, times(1)).get();

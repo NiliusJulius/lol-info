@@ -40,7 +40,9 @@ val springShellVersion by extra {"3.0.0"}
 dependencies {
 	// Spring
 	implementation("org.springframework.shell:spring-shell-starter")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	// Riot API wrapper
 	implementation("com.github.stelar7:R4J:2.2.9")
 	// SSH Shell

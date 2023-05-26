@@ -3,7 +3,7 @@ package com.niliusjulius.lolinfo.shell.component.lol.command;
 import com.github.fonimus.ssh.shell.SshShellHelper;
 import com.github.fonimus.ssh.shell.commands.SshShellComponent;
 import com.niliusjulius.lolinfo.component.Messages;
-import com.niliusjulius.lolinfo.riot.lol.component.LolSummoner;
+import com.niliusjulius.lolinfo.riot.lol.service.LolSummonerService;
 import jakarta.validation.ConstraintViolationException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import org.springframework.shell.standard.ShellOption;
 @AllArgsConstructor
 public class LolSummonerCommands {
 
-    private final LolSummoner lolSummoner;
+    private final LolSummonerService lolSummonerService;
     private final SshShellHelper helper;
 
     @ShellMethod(key = "get-level", value = "retrieve a Summoner's level")
@@ -26,7 +26,7 @@ public class LolSummonerCommands {
 
         Summoner summoner;
         try {
-            summoner = lolSummoner.retrieveSummoner(serverName, summonerName);
+            summoner = lolSummonerService.retrieveSummoner(serverName, summonerName);
         } catch (ConstraintViolationException ce) {
             return handleConstraintViolations(ce);
         }
@@ -43,7 +43,7 @@ public class LolSummonerCommands {
 
         Summoner summoner;
         try {
-            summoner = lolSummoner.retrieveSummoner(serverName, summonerName);
+            summoner = lolSummonerService.retrieveSummoner(serverName, summonerName);
         } catch (ConstraintViolationException ce) {
             return handleConstraintViolations(ce);
         }

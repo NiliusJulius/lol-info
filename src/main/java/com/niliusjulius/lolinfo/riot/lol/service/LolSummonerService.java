@@ -1,4 +1,4 @@
-package com.niliusjulius.lolinfo.riot.lol.component;
+package com.niliusjulius.lolinfo.riot.lol.service;
 
 import com.niliusjulius.lolinfo.riot.lol.validation.LeagueShardConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -6,13 +6,13 @@ import lombok.RequiredArgsConstructor;
 import no.stelar7.api.r4j.basic.constants.api.regions.LeagueShard;
 import no.stelar7.api.r4j.impl.lol.builders.summoner.SummonerBuilder;
 import no.stelar7.api.r4j.pojo.lol.summoner.Summoner;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-@Component
+@Service
 @Validated
 @RequiredArgsConstructor
-public class LolSummoner {
+public class LolSummonerService {
 
     private final SummonerBuilder summonerBuilder;
 

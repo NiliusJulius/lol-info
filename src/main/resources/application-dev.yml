@@ -7,3 +7,8 @@ ssh:
 logging:
   level:
     com.github.fonimus: debug
+
+spring:
+  devtools:
+    livereload:
+      enabled: false
