@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>LoL Info Footer</title>
+</head>
+<body>
+<footer class="fixed-bottom" th:fragment="footer">
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        <span th:text="'&copy; ' + ${#dates.year(#dates.createNow())} + ' ' + #{web.copyright.name}"/>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="/webjars/bootstrap/5.2.3/js/bootstrap.min.js" th:src="@{/webjars/bootstrap/5.2.3/js/bootstrap.min.js}"/>
+</footer>
+</body>
+</html>

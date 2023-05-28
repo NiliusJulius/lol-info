@@ -1,5 +1,6 @@
 package com.niliusjulius.lolinfo.web.controller;
 
+import com.niliusjulius.lolinfo.component.Messages;
 import com.niliusjulius.lolinfo.riot.lol.service.LolSummonerService;
 import no.stelar7.api.r4j.pojo.lol.summoner.Summoner;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(LolSummonerController.class)
-@OverrideAutoConfiguration(enabled=true)
+@OverrideAutoConfiguration(enabled = true)
 public class LolSummonerControllerTest {
 
     @Autowired
@@ -41,21 +42,36 @@ public class LolSummonerControllerTest {
     private final Integer testSummonerLevel = 123;
 
     @Nested
-    @DisplayName("summoner-level should")
-    public class SummonerLevelTest {
+    @DisplayName("summoner should")
+    @OverrideAutoConfiguration(enabled = true)
+    public class SummonerTest {
 
         @Test
         @DisplayName("display the summoner name and level")
-        public void summonerLevelValidInputTest() throws Exception {
+        public void summonerValidInputTest() throws Exception {
             when(service.retrieveSummoner(anyString(), anyString())).thenReturn(mockSummoner);
             when(mockSummoner.getName()).thenReturn(testSummonerName);
             when(mockSummoner.getSummonerLevel()).thenReturn(testSummonerLevel);
 
-            String url = "/lol/summoner-level?serverName=" + testServerName + "&summonerName=" + testSummonerName;
+            String url = "/summoner/" + testServerName + "/" + testSummonerName;
 
             mockMvc.perform(get(url)).andDo(print()).andExpect(status().isOk())
-                    .andExpect(content().string(containsString(testSummonerName)))
-                    .andExpect(content().string(containsString(testSummonerLevel.toString())));
+                    .andExpect(content().string(containsString(Messages.getMessage(
+                            "web.summoner.has.level",
+                            testSummonerName,
+                            testSummonerLevel
+                    ))));
+        }
+
+        @Test
+        @DisplayName("display not found message when summoner name does not exist")
+        public void summonerInvalidSummonerNameTest() throws Exception {
+            when(service.retrieveSummoner(anyString(), anyString())).thenReturn(null);
+
+            String url = "/summoner/" + testServerName + "/" + testSummonerName;
+
+            mockMvc.perform(get(url)).andDo(print()).andExpect(status().isOk())
+                    .andExpect(content().string(containsString(Messages.getMessage("web.summoner.not.found"))));
         }
     }
 }

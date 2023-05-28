@@ -1,6 +1,8 @@
 spring.profiles.active: prod
 
 spring.config.import: file:env.properties
+spring.messages.basename: messages/messages
+
 riot.api-key: ${API_KEY_RIOT}
 
 spring:

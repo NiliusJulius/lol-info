@@ -1,0 +1,11 @@
+.form-control:focus {
+    outline:0;
+    border-color:inherit;
+    box-shadow:none!important;
+}
+
+.form-select:focus {
+    outline:0;
+    border-color:inherit;
+    box-shadow:none!important;
+}

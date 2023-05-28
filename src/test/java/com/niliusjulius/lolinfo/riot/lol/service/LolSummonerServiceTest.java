@@ -1,4 +1,4 @@
-package com.niliusjulius.lolinfo.riot.lol.component;
+package com.niliusjulius.lolinfo.riot.lol.service;
 
 import com.niliusjulius.lolinfo.riot.lol.service.LolSummonerService;
 import no.stelar7.api.r4j.basic.constants.api.regions.LeagueShard;

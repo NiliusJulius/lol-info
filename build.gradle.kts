@@ -51,6 +51,8 @@ dependencies {
 	implementation("org.jline:jline-terminal-jna:3.22.0")
 	implementation("ch.qos.logback:logback-classic:1.4.5")
 	implementation("javax.annotation:javax.annotation-api:1.3.2")
+	// Webjars
+	implementation("org.webjars:bootstrap:5.2.3")
 
 	compileOnly("org.projectlombok:lombok")
 
