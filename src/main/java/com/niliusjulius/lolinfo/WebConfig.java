@@ -30,18 +30,23 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Bean
     public ServletWebServerFactory servletContainer() {
-        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
-            @Override
-            protected void postProcessContext(Context context) {
-                SecurityConstraint securityConstraint = new SecurityConstraint();
-                securityConstraint.setUserConstraint("CONFIDENTIAL");
-                SecurityCollection securityCollection = new SecurityCollection();
-                securityCollection.addPattern("/*");
-                securityConstraint.addCollection(securityCollection);
-                context.addConstraint(securityConstraint);
-            }
-        };
-        tomcat.addAdditionalTomcatConnectors(getHttpConnector());
+        TomcatServletWebServerFactory tomcat;
+        if (httpPort != null && sslRedirectPort != null) {
+            tomcat = new TomcatServletWebServerFactory() {
+                @Override
+                protected void postProcessContext(Context context) {
+                    SecurityConstraint securityConstraint = new SecurityConstraint();
+                    securityConstraint.setUserConstraint("CONFIDENTIAL");
+                    SecurityCollection securityCollection = new SecurityCollection();
+                    securityCollection.addPattern("/*");
+                    securityConstraint.addCollection(securityCollection);
+                    context.addConstraint(securityConstraint);
+                }
+            };
+            tomcat.addAdditionalTomcatConnectors(getHttpConnector());
+        } else {
+            tomcat = new TomcatServletWebServerFactory();
+        }
         return tomcat;
     }
 
