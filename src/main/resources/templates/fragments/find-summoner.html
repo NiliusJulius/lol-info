@@ -5,19 +5,19 @@
     <title>Find Summoner</title>
 </head>
 <body>
-<form class="row g-0" th:fragment="find-summoner" id="find-summoner-form">
-    <div class="col">
-        <input type="text" class="form-control rounded-0 rounded-start" placeholder="Summoner Name" id="summoner-name">
+<form class="row g-0 justify-content-center" th:fragment="find-summoner" id="find-summoner-form">
+    <div class="col col-md-5 col-lg-4">
+        <input type="text" class="form-control rounded-0 rounded-start small" placeholder="Summoner Name" id="summoner-name">
     </div>
-    <div class="col-2 col-xl-1">
-        <select class="form-select rounded-0" id="server-select">
+    <div class="col-3 col-sm-2 col-xl-1" style="min-width: 90px; max-width: 100px;">
+        <select class="form-select rounded-0 small" id="server-select">
             <option value="euw" selected>EUW</option>
             <option value="eune">EUNE</option>
             <option value="na">NA</option>
         </select>
     </div>
-    <div class="d-grid col-2 col-xl-1">
-        <button class="btn btn-outline-secondary rounded-0 rounded-end" type="submit">Search</button>
+    <div class="d-grid col-3 col-sm-2 col-xl-1">
+        <button class="btn btn-light rounded-0 rounded-end" style="border-color: rgba(206, 212, 218);" type="submit">Search</button>
     </div>
     <script src="/static/js/find-summoner.js" th:src="@{/js/find-summoner.js}"></script>
 </form>
