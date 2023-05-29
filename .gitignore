@@ -31,5 +31,8 @@ replay_pid*
 # Secret properties
 env.properties
 
+# Keystore
+*.p12
+
 # Riot API Caching
 /l4j8cache
