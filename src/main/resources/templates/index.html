@@ -3,9 +3,12 @@
 <head th:replace="~{fragments/header :: head (title=#{web.home.title})}">
     <title th:text="#{web.home.title}"></title>
 </head>
-<body>
-<div class="container pt-5">
-    <div th:replace="~{fragments/find-summoner :: find-summoner}"/>
+<body class="bg-secondary">
+<header th:replace="~{fragments/header :: header}" />
+<div class="container-sm px-0 pt-5">
+    <section id="find-summoner-section">
+        <div th:replace="~{fragments/find-summoner :: find-summoner}"/>
+    </section>
 </div>
 <footer th:replace="~{fragments/footer :: footer}"/>
 </body>
