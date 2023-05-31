@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="~{fragments/header :: head (title=${summoner?.name != null}
-                                                ? #{web.summoner.title(${summoner.name})}
-                                                : null)}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{/layouts/main-layout}">
+<head>
     <title th:text="${summoner?.name} + 'Summoner Profile'"/>
 </head>
 <body>
-<p th:text="${summoner != null} ? #{web.summoner.has.level(${summoner.name}, ${summoner.summonerLevel})} : #{web.summoner.not.found}"/>
-<footer th:replace="~{fragments/footer :: footer}"/>
+<section layout:fragment="main-content">
+    <p th:text="${summoner != null} ? #{web.summoner.has.level(${summoner.name}, ${summoner.summonerLevel})} : #{web.summoner.not.found}"/>
+</section>
 </body>
 </html>

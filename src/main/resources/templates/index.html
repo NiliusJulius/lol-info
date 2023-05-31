@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: head (title=#{web.home.title})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/main-layout}">
+<head>
     <title th:text="#{web.home.title}"></title>
 </head>
-<body class="bg-secondary">
-<header th:replace="~{fragments/header :: header}" />
-<div class="container-sm px-0 pt-5">
-    <section id="find-summoner-section">
-        <div th:replace="~{fragments/find-summoner :: find-summoner}"/>
-    </section>
-</div>
-<footer th:replace="~{fragments/footer :: footer}"/>
+<body>
+<section layout:fragment="main-content">
+</section>
 </body>
 </html>

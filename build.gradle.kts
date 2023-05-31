@@ -54,6 +54,8 @@ dependencies {
 	// Webjars
 	implementation("org.webjars:bootstrap:5.2.3")
 
+	implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.1")
+
 	compileOnly("org.projectlombok:lombok")
 
 	annotationProcessor("org.projectlombok:lombok")

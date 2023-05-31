@@ -1,5 +1,6 @@
 package com.niliusjulius.lolinfo;
 
+import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
@@ -26,6 +27,11 @@ public class WebConfig implements WebMvcConfigurer {
         registry
                 .addResourceHandler("/webjars/**")
                 .addResourceLocations("/webjars/");
+    }
+
+    @Bean
+    public LayoutDialect layoutDialect() {
+        return new LayoutDialect();
     }
 
     @Bean
