@@ -1,9 +1,10 @@
 package com.niliusjulius.lolinfo.web.controller;
 
+import com.niliusjulius.lolinfo.riot.lol.service.LolChampionMasteryService;
 import com.niliusjulius.lolinfo.riot.lol.service.LolSummonerService;
 import lombok.AllArgsConstructor;
+import no.stelar7.api.r4j.impl.lol.raw.DDragonAPI;
 import no.stelar7.api.r4j.pojo.lol.summoner.Summoner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LolSummonerController {
 
     private LolSummonerService lolSummonerService;
+    private LolChampionMasteryService lolChampionMasteryService;
 
     @GetMapping("")
     public String home(Model model) {
@@ -27,7 +29,11 @@ public class LolSummonerController {
                                 @PathVariable("summoner-name") String summonerName,
                                 Model model) {
         Summoner summoner = lolSummonerService.retrieveSummoner(serverName, summonerName);
+        model.addAttribute("version", DDragonAPI.getInstance().getVersions().get(0));
         model.addAttribute("summoner", summoner);
+        if (summoner != null) {
+            model.addAttribute("masteries", lolChampionMasteryService.retrieveTop5ChampionMasteries(serverName, summoner.getSummonerId()));
+        }
         return "summoner";
     }
 }

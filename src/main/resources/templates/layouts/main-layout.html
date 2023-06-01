@@ -8,7 +8,7 @@
         th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
   <link href="/static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
-<body class="bg-secondary">
+<body class="bg-dark text-light d-flex flex-column min-vh-100">
 <header class="navbar navbar-expand-sm bg-light shadow sticky-top">
   <nav class="container-xxl">
     <a class="navbar-brand" href="/">
@@ -53,8 +53,8 @@
   </section>
   <section layout:fragment="main-content"/>
 </div>
-<footer class="fixed-bottom">
-  <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+<footer class="mt-auto bg-light bg-opacity-25">
+  <div class="text-center p-4">
     <span th:text="'&copy; ' + ${#dates.year(#dates.createNow())} + ' ' + #{web.copyright.name}"/>
   </div>
 </footer>
