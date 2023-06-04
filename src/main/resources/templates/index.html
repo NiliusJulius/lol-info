@@ -6,6 +6,41 @@
 </head>
 <body>
 <section layout:fragment="main-content">
+    <div class="row d-flex justify-content-around">
+        <div class="bg-secondary py-3 rounded-2">
+            <div class="d-flex flex-column align-items-center">
+                <h3 class="" th:text="#{web.home.supportstolemyblue.stats.header}"/>
+            </div>
+        </div>
+        <div class="bg-secondary py-3 rounded-2 my-3 col-md-5">
+            <h3 class="d-flex justify-content-center" th:text="#{web.home.top.level.header}"/>
+            <div class="mx-2" th:each="summonerDetails: ${ssmbSummonerDetailsByLevel}">
+                <div class="row my-1 mx-1 bg-dark bg-opacity-50 rounded-2 justify-content-center">
+                    <div class="col-3 col-sm-2 col-lg-1 d-flex flex-column align-items-center">
+                        <h3 class="" th:text="${summonerDetails.summoner.name}"/>
+                        <img th:src="@{https://cdn.communitydragon.org/{version}/profile-icon/{iconId}(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
+                             width="100"
+                        />
+                        <span class="bg-dark px-2 rounded-pill" style="margin-top:-1rem;" th:text="${summonerDetails.summoner.summonerLevel}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-secondary py-3 rounded-2 my-3 col-md-5">
+            <h3 class="d-flex justify-content-center" th:text="#{web.home.top.mastery.header}"/>
+            <div class="mx-2" th:each="summonerDetails: ${ssmbSummonerDetailsByMastery}">
+                <div class="row my-1 mx-1 bg-dark bg-opacity-50 rounded-2 justify-content-center">
+                    <div class="col-3 col-sm-2 col-lg-1 d-flex flex-column align-items-center">
+                        <h3 class="" th:text="${summonerDetails.summoner.name}"/>
+                        <img th:src="@{https://cdn.communitydragon.org/{version}/profile-icon/{iconId}(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
+                             width="100"
+                        />
+                        <span class="bg-dark px-2 rounded-pill" style="margin-top:-1rem;" th:text="${summonerDetails.masteryScore}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 </body>
 </html>

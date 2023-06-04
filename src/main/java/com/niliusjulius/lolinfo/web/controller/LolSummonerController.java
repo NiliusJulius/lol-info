@@ -1,5 +1,6 @@
 package com.niliusjulius.lolinfo.web.controller;
 
+import com.niliusjulius.lolinfo.riot.lol.entity.SummonerDetails;
 import com.niliusjulius.lolinfo.riot.lol.service.LolChampionMasteryService;
 import com.niliusjulius.lolinfo.riot.lol.service.LolSummonerService;
 import lombok.AllArgsConstructor;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 @Controller
 @AllArgsConstructor
 @RequestMapping("/")
@@ -21,6 +26,13 @@ public class LolSummonerController {
 
     @GetMapping("")
     public String home(Model model) {
+        model.addAttribute("version", DDragonAPI.getInstance().getVersions().get(0));
+        List<SummonerDetails> summonerList = lolSummonerService.retrieveSupportStoleMyBlueExtendedSummoners();
+        summonerList.sort(Comparator.comparing((SummonerDetails s) -> s.getSummoner().getSummonerLevel()).reversed());
+        model.addAttribute("ssmbSummonerDetailsByLevel", summonerList);
+        List<SummonerDetails> summonerListByMastery = new ArrayList<>(summonerList);
+        summonerListByMastery.sort(Comparator.comparing(SummonerDetails::getMasteryScore).reversed());
+        model.addAttribute("ssmbSummonerDetailsByMastery", summonerListByMastery);
         return "index";
     }
 

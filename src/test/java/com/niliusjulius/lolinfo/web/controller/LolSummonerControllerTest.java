@@ -1,6 +1,7 @@
 package com.niliusjulius.lolinfo.web.controller;
 
 import com.niliusjulius.lolinfo.component.Messages;
+import com.niliusjulius.lolinfo.riot.lol.entity.SummonerDetails;
 import com.niliusjulius.lolinfo.riot.lol.service.LolChampionMasteryService;
 import com.niliusjulius.lolinfo.riot.lol.service.LolSummonerService;
 import no.stelar7.api.r4j.pojo.lol.championmastery.ChampionMastery;
@@ -16,6 +17,7 @@ import org.springframework.boot.test.autoconfigure.OverrideAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -48,12 +51,48 @@ public class LolSummonerControllerTest {
 
     private final String testServerName = "TestServerName";
     private final String testSummonerName = "TestSummonerName";
-    private final Integer testSummonerLevel = 123;
+    private final int testSummonerLevel = 123;
     private final String testSummonerId = "TestSummonerId";
+    private final int testMasteryScore = 1000;
+
+    @Nested
+    @DisplayName("home should")
+    public class HomeTest {
+
+        private List<SummonerDetails> createSummonerDetailsList(int count) {
+            List<SummonerDetails> summonerDetailsList = new ArrayList<>();
+            for (int i = 0; i < count; i++) {
+                Summoner summoner = mock(Summoner.class);
+                when(summoner.getName()).thenReturn(testSummonerName + count);
+                when(summoner.getSummonerLevel()).thenReturn(testSummonerLevel + count);
+                SummonerDetails summonerDetails = new SummonerDetails(summoner);
+                summonerDetails.setMasteryScore(testMasteryScore + count);
+                summonerDetailsList.add(summonerDetails);
+            }
+            return summonerDetailsList;
+        }
+
+        @Test
+        @DisplayName("display ranking lists")
+        public void homePageTest() throws Exception {
+            final int summonerCount = 3;
+            List<SummonerDetails> summonerDetailsList = createSummonerDetailsList(summonerCount);
+
+            when(lolSummonerService.retrieveSupportStoleMyBlueExtendedSummoners()).thenReturn(summonerDetailsList);
+
+            List<ResultMatcher> matchers = new ArrayList<>();
+            for (int i = 0; i < summonerCount; i++) {
+                matchers.add(content().string(containsString(Integer.toString(testSummonerLevel + summonerCount))));
+                matchers.add(content().string(containsString(testSummonerName + summonerCount)));
+                matchers.add(content().string(containsString(Integer.toString(testMasteryScore + summonerCount))));
+            }
+            mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+                    .andExpectAll(matchers.toArray(new ResultMatcher[0]));
+        }
+    }
 
     @Nested
     @DisplayName("summoner should")
-    @OverrideAutoConfiguration(enabled = true)
     public class SummonerTest {
 
         @Test
@@ -72,7 +111,7 @@ public class LolSummonerControllerTest {
 
             mockMvc.perform(get(url)).andDo(print()).andExpect(status().isOk())
                     .andExpect(content().string(containsString(testSummonerName)))
-                    .andExpect(content().string(containsString(testSummonerLevel.toString())))
+                    .andExpect(content().string(containsString(Integer.toString(testSummonerLevel))))
                     .andExpect(content().string(containsString(Messages.getMessage("web.mastery.top5.header"))));
         }
 

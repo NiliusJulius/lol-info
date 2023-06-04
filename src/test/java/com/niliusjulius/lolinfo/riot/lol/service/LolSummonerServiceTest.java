@@ -1,6 +1,7 @@
 package com.niliusjulius.lolinfo.riot.lol.service;
 
-import com.niliusjulius.lolinfo.riot.lol.service.LolSummonerService;
+import com.niliusjulius.lolinfo.riot.lol.entity.SummonerDetails;
+import com.niliusjulius.lolinfo.riot.lol.util.SupportStoleMyBlueMember;
 import no.stelar7.api.r4j.basic.constants.api.regions.LeagueShard;
 import no.stelar7.api.r4j.impl.lol.builders.summoner.SummonerBuilder;
 import no.stelar7.api.r4j.pojo.lol.summoner.Summoner;
@@ -12,6 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
@@ -59,6 +63,31 @@ public class LolSummonerServiceTest {
 
             assertNull(summoner);
             verify(summonerBuilder, times(1)).get();
+        }
+    }
+
+    @Nested
+    @DisplayName("RetrieveSSMBExtendedSummoners should")
+    public class RetrieveSSMBExtendedSummonersTest {
+
+        @Mock
+        Summoner mockSummoner;
+
+        @Test
+        @DisplayName("make a call to retrieve a summoner based on the given parameters")
+        public void retrieveSummonerCorrectTest() {
+            doReturn(summonerBuilder).when(summonerBuilder).withPlatform(any(LeagueShard.class));
+            doReturn(summonerBuilder).when(summonerBuilder).withName(anyString());
+            doReturn(mockSummoner).when(summonerBuilder).get();
+            doReturn(0).when(mockSummoner).getMasteryScore();
+
+            List<SummonerDetails> summonerDetailsList = lolSummonerService.retrieveSupportStoleMyBlueExtendedSummoners();
+            assertEquals(SupportStoleMyBlueMember.values().length, summonerDetailsList.size());
+
+            verify(summonerBuilder, times(SupportStoleMyBlueMember.values().length)).withPlatform(any(LeagueShard.class));
+            verify(summonerBuilder, times(SupportStoleMyBlueMember.values().length)).withName(anyString());
+            verify(summonerBuilder, times(SupportStoleMyBlueMember.values().length)).get();
+            verify(mockSummoner, times(SupportStoleMyBlueMember.values().length)).getMasteryScore();
         }
     }
 }
