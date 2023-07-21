@@ -26,7 +26,7 @@ public class LolSummonerCommands {
 
         Summoner summoner;
         try {
-            summoner = lolSummonerService.retrieveSummoner(serverName, summonerName);
+            summoner = lolSummonerService.retrieveSummonerByName(serverName, summonerName);
         } catch (ConstraintViolationException ce) {
             return handleConstraintViolations(ce);
         }
@@ -43,7 +43,7 @@ public class LolSummonerCommands {
 
         Summoner summoner;
         try {
-            summoner = lolSummonerService.retrieveSummoner(serverName, summonerName);
+            summoner = lolSummonerService.retrieveSummonerByName(serverName, summonerName);
         } catch (ConstraintViolationException ce) {
             return handleConstraintViolations(ce);
         }

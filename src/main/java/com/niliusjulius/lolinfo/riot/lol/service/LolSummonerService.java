@@ -21,15 +21,19 @@ public class LolSummonerService {
 
     private final SummonerBuilder summonerBuilder;
 
-    public Summoner retrieveSummoner(@LeagueShardConstraint String shardName, @NotBlank(message = "{summoner.error.name.not.empty}") String summonerName) {
+    public Summoner retrieveSummonerByName(@LeagueShardConstraint String shardName, @NotBlank(message = "{summoner.error.name.not.empty}") String summonerName) {
         return summonerBuilder.withPlatform(LeagueShard.fromString(shardName).orElse(null)).withName(summonerName).get();
+    }
+
+    public Summoner retrieveSummonerBySummonerId(@LeagueShardConstraint String shardName, @NotBlank(message = "{summoner.error.id.not.empty}") String summonerId) {
+        return summonerBuilder.withPlatform(LeagueShard.fromString(shardName).orElse(null)).withSummonerId(summonerId).get();
     }
 
     public List<SummonerDetails> retrieveSupportStoleMyBlueExtendedSummoners() {
         List<SummonerDetails> summonerList = new ArrayList<>();
         SupportStoleMyBlueMember.stream()
                 .forEach(member -> {
-                    Summoner summoner = retrieveSummoner(member.leagueShard.getValue(), member.name);
+                    Summoner summoner = retrieveSummonerBySummonerId(member.leagueShard.getValue(), member.summonerId);
                     SummonerDetails summonerDetails = new SummonerDetails(summoner);
                     summonerDetails.setMasteryScore(summoner.getMasteryScore());
                     summonerList.add(summonerDetails);

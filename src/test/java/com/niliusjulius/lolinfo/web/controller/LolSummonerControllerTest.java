@@ -98,7 +98,7 @@ public class LolSummonerControllerTest {
         @Test
         @DisplayName("display the summoner info")
         public void summonerValidInputTest() throws Exception {
-            when(lolSummonerService.retrieveSummoner(anyString(), anyString())).thenReturn(mockSummoner);
+            when(lolSummonerService.retrieveSummonerByName(anyString(), anyString())).thenReturn(mockSummoner);
             when(mockSummoner.getName()).thenReturn(testSummonerName);
             when(mockSummoner.getSummonerLevel()).thenReturn(testSummonerLevel);
             when(mockSummoner.getSummonerId()).thenReturn(testSummonerId);
@@ -118,7 +118,7 @@ public class LolSummonerControllerTest {
         @Test
         @DisplayName("display not found message when summoner name does not exist")
         public void summonerInvalidSummonerNameTest() throws Exception {
-            when(lolSummonerService.retrieveSummoner(anyString(), anyString())).thenReturn(null);
+            when(lolSummonerService.retrieveSummonerByName(anyString(), anyString())).thenReturn(null);
 
             String url = "/summoner/" + testServerName + "/" + testSummonerName;
 

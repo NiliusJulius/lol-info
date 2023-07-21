@@ -5,23 +5,23 @@ import no.stelar7.api.r4j.basic.constants.api.regions.LeagueShard;
 import java.util.stream.Stream;
 
 public enum SupportStoleMyBlueMember {
-    FERRANTEPESCARA("FerrantePescara", LeagueShard.EUW1),
-    LOLBROEK("lolbroek", LeagueShard.EUW1),
-    BOTERHAMDEGEKSTE("BoterhamDeGekste", LeagueShard.EUW1),
-    SHUNIATH("Shuniath", LeagueShard.EUW1),
-    FEMIT("Femit", LeagueShard.EUW1),
-    HAMSTERTJE("Hamstertje", LeagueShard.EUW1),
-    DRRICHARD("DRRichard", LeagueShard.EUW1),
-    THEMASTEROFDOME("TheMasterofDome", LeagueShard.EUW1),
-    KRAKELKRANS("Krakelkrans", LeagueShard.EUW1),
-    TJEHU("Tjehu", LeagueShard.EUW1);
+    FERRANTEPESCARA("WptnNxE7pxcySX2bZEaEvbwfP8HDO03N7ZnpMdeagOOHYYw", LeagueShard.EUW1),
+    LOLBROEK("D8qSwv6l9roJhrSBC-B8IKGdW-H8Iz32_b3nOEMZq_Ko", LeagueShard.EUW1),
+    BOTERHAMDEGEKSTE("wRRsrsXf1nBvsJfCerogdsCaOaGCNDCvh93kY2M2kBW-gs-i", LeagueShard.EUW1),
+    SHUNIATH("qZEzjA93tONFFfJ4afwnUTWq8Gazna2DgUuaqC8GxN8iElI", LeagueShard.EUW1),
+    FEMIT("u_RImbqsMT61_NXJf7ZTaSFlZJkCDAGoltZuNyvLMh7RSgM", LeagueShard.EUW1),
+    HAMSTERTJE("ScmRoamoGEJPhE1oNEIF7OcRoUqi2lhdKOqBFEp4EqS7Mhs", LeagueShard.EUW1),
+    DRRICHARD("hJXJro8vtEOd7dKDYRmiigC-ItKG8WBO9yoj2nIRmxWMz30", LeagueShard.EUW1),
+    THEMASTEROFDOME("RtvYH_TPDHDCwIGbZMLJE4-WQN1ruwLuZ9tLyK4oMtSm_qk", LeagueShard.EUW1),
+    KRAKELKRANS("gQ0MaA6a0iUpn-4yIcqfgnMDRIFkyQdK1_fpASO2l-YnjJGXPNBF85rxwQ", LeagueShard.EUW1),
+    TJEHU("rMwU0Y3L_rWItbRDwBfBvLAycBSm3fyti99dDSEX_uk6mto", LeagueShard.EUW1);
 
 
-    public final String name;
+    public final String summonerId;
     public final LeagueShard leagueShard;
 
-    SupportStoleMyBlueMember(String name, LeagueShard leagueShard) {
-        this.name = name;
+    SupportStoleMyBlueMember(String summonerId, LeagueShard leagueShard) {
+        this.summonerId = summonerId;
         this.leagueShard = leagueShard;
     }
 

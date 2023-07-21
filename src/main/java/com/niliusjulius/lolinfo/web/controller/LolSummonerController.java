@@ -40,7 +40,7 @@ public class LolSummonerController {
     public String summonerLevel(@PathVariable("server-name") String serverName,
                                 @PathVariable("summoner-name") String summonerName,
                                 Model model) {
-        Summoner summoner = lolSummonerService.retrieveSummoner(serverName, summonerName);
+        Summoner summoner = lolSummonerService.retrieveSummonerByName(serverName, summonerName);
         model.addAttribute("version", DDragonAPI.getInstance().getVersions().get(0));
         model.addAttribute("summoner", summoner);
         if (summoner != null) {

@@ -28,8 +28,8 @@ public class LolSummonerServiceTest {
     private LolSummonerService lolSummonerService;
 
     @Nested
-    @DisplayName("RetrieveSummoner should")
-    public class RetrieveSummonerTest {
+    @DisplayName("RetrieveSummonerByName should")
+    public class RetrieveSummonerByNameTest {
 
         @Test
         @DisplayName("make a call to retrieve a summoner based on the given parameters")
@@ -42,7 +42,7 @@ public class LolSummonerServiceTest {
             String leagueShardName = LeagueShard.EUW1.name();
             String summonerName = "TestSummonerName";
 
-            lolSummonerService.retrieveSummoner(leagueShardName, summonerName);
+            lolSummonerService.retrieveSummonerByName(leagueShardName, summonerName);
 
             verify(summonerBuilder, times(1)).withPlatform(leagueShard);
             verify(summonerBuilder, times(1)).withName(summonerName);
@@ -59,7 +59,46 @@ public class LolSummonerServiceTest {
             String leagueShardName = LeagueShard.EUW1.name();
             String summonerName = "TestSummonerName";
 
-            Summoner summoner = lolSummonerService.retrieveSummoner(leagueShardName, summonerName);
+            Summoner summoner = lolSummonerService.retrieveSummonerByName(leagueShardName, summonerName);
+
+            assertNull(summoner);
+            verify(summonerBuilder, times(1)).get();
+        }
+    }
+
+    @Nested
+    @DisplayName("RetrieveSummonerBySummonerId should")
+    public class RetrieveSummonerBySummonerIdTest {
+
+        @Test
+        @DisplayName("make a call to retrieve a summoner based on the given parameters")
+        public void retrieveSummonerCorrectTest() {
+            when(summonerBuilder.withPlatform(any(LeagueShard.class))).thenReturn(summonerBuilder);
+            when(summonerBuilder.withSummonerId(anyString())).thenReturn(summonerBuilder);
+            when(summonerBuilder.get()).thenReturn(null);
+
+            LeagueShard leagueShard = LeagueShard.EUW1;
+            String leagueShardName = LeagueShard.EUW1.name();
+            String summonerId = "TestSummonerId";
+
+            lolSummonerService.retrieveSummonerBySummonerId(leagueShardName, summonerId);
+
+            verify(summonerBuilder, times(1)).withPlatform(leagueShard);
+            verify(summonerBuilder, times(1)).withSummonerId(summonerId);
+            verify(summonerBuilder, times(1)).get();
+        }
+
+        @Test
+        @DisplayName("return null when a summoner can not be found")
+        public void retrieveSummonerNotFoundTest() {
+            when(summonerBuilder.withPlatform(any(LeagueShard.class))).thenReturn(summonerBuilder);
+            when(summonerBuilder.withSummonerId(anyString())).thenReturn(summonerBuilder);
+            when(summonerBuilder.get()).thenReturn(null);
+
+            String leagueShardName = LeagueShard.EUW1.name();
+            String summonerId = "TestSummonerId";
+
+            Summoner summoner = lolSummonerService.retrieveSummonerBySummonerId(leagueShardName, summonerId);
 
             assertNull(summoner);
             verify(summonerBuilder, times(1)).get();
@@ -77,7 +116,7 @@ public class LolSummonerServiceTest {
         @DisplayName("make a call to retrieve a summoner based on the given parameters")
         public void retrieveSummonerCorrectTest() {
             doReturn(summonerBuilder).when(summonerBuilder).withPlatform(any(LeagueShard.class));
-            doReturn(summonerBuilder).when(summonerBuilder).withName(anyString());
+            doReturn(summonerBuilder).when(summonerBuilder).withSummonerId(anyString());
             doReturn(mockSummoner).when(summonerBuilder).get();
             doReturn(0).when(mockSummoner).getMasteryScore();
 
@@ -85,7 +124,7 @@ public class LolSummonerServiceTest {
             assertEquals(SupportStoleMyBlueMember.values().length, summonerDetailsList.size());
 
             verify(summonerBuilder, times(SupportStoleMyBlueMember.values().length)).withPlatform(any(LeagueShard.class));
-            verify(summonerBuilder, times(SupportStoleMyBlueMember.values().length)).withName(anyString());
+            verify(summonerBuilder, times(SupportStoleMyBlueMember.values().length)).withSummonerId(anyString());
             verify(summonerBuilder, times(SupportStoleMyBlueMember.values().length)).get();
             verify(mockSummoner, times(SupportStoleMyBlueMember.values().length)).getMasteryScore();
         }
