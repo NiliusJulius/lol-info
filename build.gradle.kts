@@ -44,7 +44,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	// Riot API wrapper
-	implementation("com.github.stelar7:R4J:2.2.9")
+	implementation("com.github.stelar7:R4J:2.2.19")
 	// SSH Shell
 	implementation("com.github.fonimus:ssh-shell-spring-boot-starter:2.0.3")
 	implementation("net.java.dev.jna:jna:5.13.0")
