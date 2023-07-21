@@ -33,6 +33,12 @@ public class LolSummonerController {
         List<SummonerDetails> summonerListByMastery = new ArrayList<>(summonerList);
         summonerListByMastery.sort(Comparator.comparing(SummonerDetails::getMasteryScore).reversed());
         model.addAttribute("ssmbSummonerDetailsByMastery", summonerListByMastery);
+        List<SummonerDetails> summonerListBySoloRank = new ArrayList<>(summonerList);
+        summonerListBySoloRank.sort(Comparator.comparing((SummonerDetails s) -> s.getSolo_5v5_rank().getTierDivisionType()));
+        model.addAttribute("ssmbSummonerDetailsBySoloRank", summonerListBySoloRank);
+        List<SummonerDetails> summonerListByFlexRank = new ArrayList<>(summonerList);
+        summonerListByFlexRank.sort(Comparator.comparing((SummonerDetails s) -> s.getFlex_5v5_rank().getTierDivisionType()));
+        model.addAttribute("ssmbSummonerDetailsByFlexRank", summonerListByFlexRank);
         return "index";
     }
 

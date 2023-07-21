@@ -5,6 +5,7 @@ import com.niliusjulius.lolinfo.riot.lol.entity.SummonerDetails;
 import com.niliusjulius.lolinfo.riot.lol.service.LolChampionMasteryService;
 import com.niliusjulius.lolinfo.riot.lol.service.LolSummonerService;
 import no.stelar7.api.r4j.pojo.lol.championmastery.ChampionMastery;
+import no.stelar7.api.r4j.pojo.lol.league.LeagueEntry;
 import no.stelar7.api.r4j.pojo.lol.summoner.Summoner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -63,10 +64,12 @@ public class LolSummonerControllerTest {
             List<SummonerDetails> summonerDetailsList = new ArrayList<>();
             for (int i = 0; i < count; i++) {
                 Summoner summoner = mock(Summoner.class);
-                when(summoner.getName()).thenReturn(testSummonerName + count);
-                when(summoner.getSummonerLevel()).thenReturn(testSummonerLevel + count);
+                when(summoner.getName()).thenReturn(testSummonerName + i);
+                when(summoner.getSummonerLevel()).thenReturn(testSummonerLevel + i);
                 SummonerDetails summonerDetails = new SummonerDetails(summoner);
-                summonerDetails.setMasteryScore(testMasteryScore + count);
+                summonerDetails.setMasteryScore(testMasteryScore + i);
+                summonerDetails.setSolo_5v5_rank(new LeagueEntry());
+                summonerDetails.setFlex_5v5_rank(new LeagueEntry());
                 summonerDetailsList.add(summonerDetails);
             }
             return summonerDetailsList;
@@ -82,9 +85,9 @@ public class LolSummonerControllerTest {
 
             List<ResultMatcher> matchers = new ArrayList<>();
             for (int i = 0; i < summonerCount; i++) {
-                matchers.add(content().string(containsString(Integer.toString(testSummonerLevel + summonerCount))));
-                matchers.add(content().string(containsString(testSummonerName + summonerCount)));
-                matchers.add(content().string(containsString(Integer.toString(testMasteryScore + summonerCount))));
+                matchers.add(content().string(containsString(Integer.toString(testSummonerLevel + i))));
+                matchers.add(content().string(containsString(testSummonerName + i)));
+                matchers.add(content().string(containsString(Integer.toString(testMasteryScore + i))));
             }
             mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
                     .andExpectAll(matchers.toArray(new ResultMatcher[0]));

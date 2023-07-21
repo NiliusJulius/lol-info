@@ -6,17 +6,58 @@
 </head>
 <body>
 <section layout:fragment="main-content">
-    <div class="row d-flex justify-content-around">
-        <div class="bg-secondary py-3 rounded-2">
+    <div class="row row-cols-11 d-flex justify-content-around"
+         th:with="listOuterColumnDiv=${'bg-secondary py-3 rounded-2 my-3 mx-2 col-md-8 col-lg-6 col-xl-5 text-nowrap'},
+         listInnerRowDiv=${'row my-1 mx-1 bg-dark bg-opacity-50 rounded-2 justify-content-between flex-nowrap py-2'}"
+    >
+        <div class="bg-secondary py-3 rounded-2 col-12">
             <div class="d-flex flex-column align-items-center">
                 <h3 class="" th:text="#{web.home.supportstolemyblue.stats.header}"/>
             </div>
         </div>
-        <div class="bg-secondary py-3 rounded-2 my-3 col-md-5">
+        <div th:class="${listOuterColumnDiv}">
+            <h3 class="d-flex justify-content-center" th:text="#{web.home.top.solo.header}"/>
+            <div class="mx-2" th:each="summonerDetails: ${ssmbSummonerDetailsBySoloRank}">
+                <div th:class="${listInnerRowDiv}">
+                    <div class="col d-flex flex-column align-items-center">
+                        <h4 class="" th:text="${summonerDetails.summoner.name}"/>
+                        <img th:src="@{https://cdn.communitydragon.org/{version}/profile-icon/{iconId}(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
+                             width="100"
+                        />
+                    </div>
+                    <div class="col d-flex flex-column align-items-center">
+                        <img th:src="@{/img/lol/rank/{rank}.png(rank=${summonerDetails.solo_5v5_rank?.tier ?: 'unranked'})}"
+                             width="100"
+                        />
+                        <h4 class="text-center" th:text="${(summonerDetails.solo_5v5_rank?.tier ?: 'unranked') + ' ' + (summonerDetails.solo_5v5_rank?.rank ?: '')}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:class="${listOuterColumnDiv}">
+            <h3 class="d-flex justify-content-center" th:text="#{web.home.top.flex.header}"/>
+            <div class="mx-2" th:each="summonerDetails: ${ssmbSummonerDetailsByFlexRank}">
+                <div th:class="${listInnerRowDiv}">
+                    <div class="col d-flex flex-column align-items-center">
+                        <h4 class="" th:text="${summonerDetails.summoner.name}"/>
+                        <img th:src="@{https://cdn.communitydragon.org/{version}/profile-icon/{iconId}(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
+                             width="100"
+                        />
+                    </div>
+                    <div class="col d-flex flex-column align-items-center">
+                        <img th:src="@{/img/lol/rank/{rank}.png(rank=${summonerDetails.flex_5v5_rank?.tier ?: 'unranked'})}"
+                             width="100"
+                        />
+                        <h4 class="text-center" th:text="${(summonerDetails.flex_5v5_rank?.tier ?: 'unranked') + ' ' + (summonerDetails.flex_5v5_rank?.rank ?: '')}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div th:class="${listOuterColumnDiv}">
             <h3 class="d-flex justify-content-center" th:text="#{web.home.top.level.header}"/>
             <div class="mx-2" th:each="summonerDetails: ${ssmbSummonerDetailsByLevel}">
-                <div class="row my-1 mx-1 bg-dark bg-opacity-50 rounded-2 justify-content-center">
-                    <div class="col-3 col-sm-2 col-lg-1 d-flex flex-column align-items-center">
+                <div th:class="${listInnerRowDiv}">
+                    <div class="col d-flex flex-column align-items-center">
                         <h3 class="" th:text="${summonerDetails.summoner.name}"/>
                         <img th:src="@{https://cdn.communitydragon.org/{version}/profile-icon/{iconId}(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
                              width="100"
@@ -26,11 +67,11 @@
                 </div>
             </div>
         </div>
-        <div class="bg-secondary py-3 rounded-2 my-3 col-md-5">
+        <div th:class="${listOuterColumnDiv}">
             <h3 class="d-flex justify-content-center" th:text="#{web.home.top.mastery.header}"/>
             <div class="mx-2" th:each="summonerDetails: ${ssmbSummonerDetailsByMastery}">
-                <div class="row my-1 mx-1 bg-dark bg-opacity-50 rounded-2 justify-content-center">
-                    <div class="col-3 col-sm-2 col-lg-1 d-flex flex-column align-items-center">
+                <div th:class="${listInnerRowDiv}">
+                    <div class="col d-flex flex-column align-items-center">
                         <h3 class="" th:text="${summonerDetails.summoner.name}"/>
                         <img th:src="@{https://cdn.communitydragon.org/{version}/profile-icon/{iconId}(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
                              width="100"
