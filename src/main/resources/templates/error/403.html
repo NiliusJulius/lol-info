@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main-layout}">
+<head>
+    <title th:text="#{web.error.forbidden403.title}"></title>
+</head>
+<body>
+<section layout:fragment="main-content" class="text-center">
+    <h1 th:text="#{web.error.forbidden403.code}"/>
+    <h2 th:text="#{web.error.forbidden403.meaning}"/>
+</section>
+</body>
+</html>
