@@ -21,7 +21,7 @@
                 <div th:class="${listInnerRowDiv}">
                     <div class="col d-flex flex-column align-items-center">
                         <h4 class="" th:text="${summonerDetails.summoner.name}"/>
-                        <img th:src="@{https://cdn.communitydragon.org/{version}/profile-icon/{iconId}(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
+                        <img th:src="@{https://ddragon.leagueoflegends.com/cdn/{version}/img/profileicon/{iconId}.png(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
                              width="100"
                         />
                     </div>
@@ -40,7 +40,7 @@
                 <div th:class="${listInnerRowDiv}">
                     <div class="col d-flex flex-column align-items-center">
                         <h4 class="" th:text="${summonerDetails.summoner.name}"/>
-                        <img th:src="@{https://cdn.communitydragon.org/{version}/profile-icon/{iconId}(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
+                        <img th:src="@{https://ddragon.leagueoflegends.com/cdn/{version}/img/profileicon/{iconId}.png(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
                              width="100"
                         />
                     </div>
@@ -59,7 +59,7 @@
                 <div th:class="${listInnerRowDiv}">
                     <div class="col d-flex flex-column align-items-center">
                         <h3 class="" th:text="${summonerDetails.summoner.name}"/>
-                        <img th:src="@{https://cdn.communitydragon.org/{version}/profile-icon/{iconId}(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
+                        <img th:src="@{https://ddragon.leagueoflegends.com/cdn/{version}/img/profileicon/{iconId}.png(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
                              width="100"
                         />
                         <span class="bg-dark px-2 rounded-pill" style="margin-top:-1rem;" th:text="${summonerDetails.summoner.summonerLevel}"/>
@@ -73,7 +73,7 @@
                 <div th:class="${listInnerRowDiv}">
                     <div class="col d-flex flex-column align-items-center">
                         <h3 class="" th:text="${summonerDetails.summoner.name}"/>
-                        <img th:src="@{https://cdn.communitydragon.org/{version}/profile-icon/{iconId}(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
+                        <img th:src="@{https://ddragon.leagueoflegends.com/cdn/{version}/img/profileicon/{iconId}.png(version=${version},iconId=${summonerDetails.summoner.profileIconId})}"
                              width="100"
                         />
                         <span class="bg-dark px-2 rounded-pill" style="margin-top:-1rem;" th:text="${summonerDetails.masteryScore}"/>

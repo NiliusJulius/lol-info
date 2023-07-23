@@ -2,6 +2,7 @@ package com.niliusjulius.lolinfo.web.controller;
 
 import com.niliusjulius.lolinfo.riot.lol.entity.SummonerDetails;
 import com.niliusjulius.lolinfo.riot.lol.service.LolChampionMasteryService;
+import com.niliusjulius.lolinfo.riot.lol.service.LolChampionService;
 import com.niliusjulius.lolinfo.riot.lol.service.LolSummonerService;
 import lombok.AllArgsConstructor;
 import no.stelar7.api.r4j.impl.lol.raw.DDragonAPI;
@@ -22,6 +23,7 @@ import java.util.List;
 public class LolSummonerController {
 
     private LolSummonerService lolSummonerService;
+    private LolChampionService lolChampionService;
     private LolChampionMasteryService lolChampionMasteryService;
 
     @GetMapping("")
@@ -49,6 +51,7 @@ public class LolSummonerController {
         Summoner summoner = lolSummonerService.retrieveSummonerByName(serverName, summonerName);
         model.addAttribute("version", DDragonAPI.getInstance().getVersions().get(0));
         model.addAttribute("summoner", summoner);
+        model.addAttribute("championsMap", lolChampionService.retrieveChampionsMap());
         if (summoner != null) {
             model.addAttribute("masteries", lolChampionMasteryService.retrieveTop5ChampionMasteries(serverName, summoner.getSummonerId()));
         }

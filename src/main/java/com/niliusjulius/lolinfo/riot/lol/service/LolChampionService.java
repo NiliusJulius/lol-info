@@ -8,11 +8,16 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Validated
 @RequiredArgsConstructor
 public class LolChampionService {
+
+    public Map<Integer, StaticChampion> retrieveChampionsMap() {
+        return DDragonAPI.getInstance().getChampions();
+    }
 
     public List<StaticChampion> retrieveChampionsList() {
         return new ArrayList<>(DDragonAPI.getInstance().getChampions().values());
