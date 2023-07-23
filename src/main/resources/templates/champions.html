@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main-layout}">
+<head>
+    <title th:text="#{web.champions.title}"/>
+</head>
+<body>
+<section layout:fragment="main-content">
+    <div class="bg-secondary py-3 mb-3 rounded-2">
+        <h3 class="d-flex justify-content-center" th:text="#{web.champions.header}"/>
+        <div class="row justify-content-center mx-3">
+            <div class="col-3 col-sm-2 col-lg-1 d-flex align-items-center p-2" th:each="champion: ${championList}">
+                <img class="w-100"
+                     th:src="@{https://ddragon.leagueoflegends.com/cdn/{version}/img/champion/{championKey}.png(version=${version},championKey=${champion.key})}">
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
