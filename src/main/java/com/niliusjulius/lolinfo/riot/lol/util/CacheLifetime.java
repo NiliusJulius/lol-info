@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class CacheLifetime {
 
+    private static final long DAYS_7 = TimeUnit.DAYS.toMillis(7);
     private static final long DAYS_1 = TimeUnit.DAYS.toMillis(1);
     private static final long HOURS_1 = TimeUnit.HOURS.toMillis(1);
     private static final long MINUTES_30 = TimeUnit.MINUTES.toMillis(30);
@@ -47,19 +48,19 @@ public class CacheLifetime {
         CacheLifetimeHint.DEFAULTS.add(URLEndpoint.V1_CHALLENGES_LEADERBOARD_BY_LEVEL, HOURS_1);
         CacheLifetimeHint.DEFAULTS.add(URLEndpoint.V1_CHALLENGES_BY_PLAYER, MINUTES_10);
 
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_CHAMPION_MANY, HOURS_1);
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_ITEMS, HOURS_1);
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_LANGUAGE_STRINGS, HOURS_1);
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_LANGUAGES, HOURS_1);
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_MAPS, HOURS_1);
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_MASTERIES, HOURS_1);
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_PROFILEICONS, HOURS_1);
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_RUNES, HOURS_1);
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_PERKS, HOURS_1);
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_PERKPATHS, HOURS_1);
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_SUMMONER_SPELLS, HOURS_1);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_CHAMPION_MANY, DAYS_7);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_ITEMS, DAYS_7);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_LANGUAGE_STRINGS, DAYS_7);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_LANGUAGES, DAYS_7);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_MAPS, DAYS_7);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_MASTERIES, DAYS_7);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_PROFILEICONS, DAYS_7);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_RUNES, DAYS_7);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_PERKS, DAYS_7);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_PERKPATHS, DAYS_7);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_SUMMONER_SPELLS, DAYS_7);
         CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_VERSIONS, HOURS_1);
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_REALMS, HOURS_1);
-        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_TARBALL, HOURS_1);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_REALMS, DAYS_7);
+        CacheLifetimeHint.DEFAULTS.add(URLEndpoint.DDRAGON_TARBALL, DAYS_7);
     }
 }
