@@ -16,10 +16,13 @@ import java.util.Map;
 public class LolChampionService {
 
     public Map<Integer, StaticChampion> retrieveChampionsMap() {
-        return DDragonAPI.getInstance().getChampions();
+        return DDragonAPI.getInstance().getChampions(DDragonAPI.getInstance().getVersions().get(0), null);
     }
 
     public List<StaticChampion> retrieveChampionsList() {
-        return new ArrayList<>(DDragonAPI.getInstance().getChampions().values());
+        return new ArrayList<>(DDragonAPI.getInstance().getChampions(
+                DDragonAPI.getInstance().getVersions().get(0),
+                null
+        ).values());
     }
 }

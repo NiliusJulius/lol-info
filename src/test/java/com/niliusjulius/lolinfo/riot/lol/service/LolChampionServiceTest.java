@@ -11,9 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -27,6 +25,7 @@ public class LolChampionServiceTest {
     private LolChampionService lolChampionService;
 
     private final String testChampionName = "testChampionName";
+    private final String testVersion = "testVersion";
 
     private Map<Integer, StaticChampion> createChampionsMap(int count) {
         Map<Integer, StaticChampion> championsMap = new HashMap<>();
@@ -52,11 +51,12 @@ public class LolChampionServiceTest {
             try (MockedStatic<DDragonAPI> dDragonAPIMockedStatic = mockStatic(DDragonAPI.class)) {
 
                 dDragonAPIMockedStatic.when(DDragonAPI::getInstance).thenReturn(dDragonAPI);
-                when(dDragonAPI.getChampions()).thenReturn(championsMap);
+                when(dDragonAPI.getChampions(anyString(), isNull())).thenReturn(championsMap);
+                when(dDragonAPI.getVersions()).thenReturn(new ArrayList<>(Collections.singleton(testVersion)));
 
                 Map<Integer, StaticChampion> championsResultMap = lolChampionService.retrieveChampionsMap();
 
-                verify(dDragonAPI, times(1)).getChampions();
+                verify(dDragonAPI, times(1)).getChampions(testVersion, null);
                 assertEquals(championCount, championsResultMap.size());
                 for (int i = 0; i < championCount; i++) {
                     assertEquals(championsMap.get(i).getName(), championsResultMap.get(i).getName());
@@ -79,11 +79,12 @@ public class LolChampionServiceTest {
             try (MockedStatic<DDragonAPI> dDragonAPIMockedStatic = mockStatic(DDragonAPI.class)) {
 
                 dDragonAPIMockedStatic.when(DDragonAPI::getInstance).thenReturn(dDragonAPI);
-                when(dDragonAPI.getChampions()).thenReturn(championsMap);
+                when(dDragonAPI.getChampions(anyString(), isNull())).thenReturn(championsMap);
+                when(dDragonAPI.getVersions()).thenReturn(new ArrayList<>(Collections.singleton(testVersion)));
 
                 List<StaticChampion> championsResultList = lolChampionService.retrieveChampionsList();
 
-                verify(dDragonAPI, times(1)).getChampions();
+                verify(dDragonAPI, times(1)).getChampions(testVersion, null);
                 assertEquals(championCount, championsResultList.size());
                 for (int i = 0; i < championCount; i++) {
                     assertEquals(championsMap.get(i).getName(), championsResultList.get(i).getName());
