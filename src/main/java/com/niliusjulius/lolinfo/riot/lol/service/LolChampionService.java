@@ -25,4 +25,14 @@ public class LolChampionService {
                 null
         ).values());
     }
+
+    public StaticChampion retrieveChampion(String championKey) {
+        Map<Integer, StaticChampion> championMap = retrieveChampionsMap();
+        for (StaticChampion champion : championMap.values()) {
+            if (champion.getKey().equals(championKey)) {
+                return champion;
+            }
+        }
+        return null;
+    }
 }
