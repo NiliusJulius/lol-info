@@ -77,7 +77,7 @@ public class LolSummonerControllerTest {
 
         @Test
         @DisplayName("display ranking lists")
-        public void homePageTest() throws Exception {
+        public void ssmbStatsTest() throws Exception {
             final int summonerCount = 3;
             List<SummonerDetails> summonerDetailsList = createSummonerDetailsList(summonerCount);
 
@@ -89,7 +89,7 @@ public class LolSummonerControllerTest {
                 matchers.add(content().string(containsString(testSummonerName + i)));
                 matchers.add(content().string(containsString(Integer.toString(testMasteryScore + i))));
             }
-            mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
+            mockMvc.perform(get("/find-ssmb-stats")).andDo(print()).andExpect(status().isOk())
                     .andExpectAll(matchers.toArray(new ResultMatcher[0]));
         }
     }

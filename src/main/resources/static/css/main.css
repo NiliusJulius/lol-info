@@ -9,3 +9,11 @@
     border-color:inherit;
     box-shadow:none!important;
 }
+
+#spinner {
+    display:none;
+}
+
+#spinner.show {
+    display:block;
+}

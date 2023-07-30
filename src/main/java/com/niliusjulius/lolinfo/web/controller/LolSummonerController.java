@@ -28,6 +28,11 @@ public class LolSummonerController {
 
     @GetMapping("")
     public String home(Model model) {
+        return "index";
+    }
+
+    @GetMapping("find-ssmb-stats")
+    public String find(Model model) {
         model.addAttribute("version", DDragonAPI.getInstance().getVersions().get(0));
         List<SummonerDetails> summonerList = lolSummonerService.retrieveSupportStoleMyBlueExtendedSummoners();
         summonerList.sort(Comparator.comparing((SummonerDetails s) -> s.getSummoner().getSummonerLevel()).reversed());
@@ -41,7 +46,7 @@ public class LolSummonerController {
         List<SummonerDetails> summonerListByFlexRank = new ArrayList<>(summonerList);
         summonerListByFlexRank.sort(Comparator.comparing((SummonerDetails s) -> s.getFlex_5v5_rank().getTierDivisionType()));
         model.addAttribute("ssmbSummonerDetailsByFlexRank", summonerListByFlexRank);
-        return "index";
+        return "fragments/ssmb-fragments :: ssmb-lists";
     }
 
     @GetMapping("summoner/{server-name}/{summoner-name}")
