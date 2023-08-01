@@ -9,10 +9,11 @@
     <div class="bg-secondary py-3 mb-3 rounded-2">
         <h3 class="d-flex justify-content-center" th:text="#{web.champions.header}"/>
         <div class="row justify-content-center mx-3">
-            <div class="col-3 col-sm-2 col-lg-1 d-flex align-items-center p-2" th:each="champion: ${championList}">
-                <a th:href="@{/champions/{championKey}(championKey=${champion.key})}">
+            <div class="col-3 col-sm-2 col-lg-1 d-flex align-items-stretch p-2" th:each="champion: ${championList}">
+                <a class="text-decoration-none text-reset text-center w-100" th:href="@{/champions/{championKey}(championKey=${champion.key})}">
                     <img class="w-100"
                          th:src="@{https://ddragon.leagueoflegends.com/cdn/{version}/img/champion/{championKey}.png(version=${version},championKey=${champion.key})}">
+                    <span class="text-nowrap text-center w-100" th:text="${champion.name}"/>
                 </a>
             </div>
         </div>
