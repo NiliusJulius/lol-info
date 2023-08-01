@@ -7,12 +7,140 @@
 <body>
 <section layout:fragment="main-content">
     <div class="bg-secondary py-3 mb-3 rounded-2">
-        <h3 class="d-flex justify-content-center" th:text="#{web.champion.header(${champion.name})}"/>
+        <h2 class="d-flex justify-content-center" th:text="${champion.name}"/>
+        <h4 class="d-flex justify-content-center text-capitalize" th:text="${champion.title}"/>
         <div class="row justify-content-center mx-3">
-            <div class="col-3 col-sm-2 col-lg-1 p-2">
+            <div class="col-3 col-md-2 col-lg-1 p-2">
                 <img class="w-100"
                      th:src="@{https://ddragon.leagueoflegends.com/cdn/{version}/img/champion/{championKey}.png(version=${version},championKey=${champion.key})}">
             </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-auto order-md-last">
+            <div class="text-nowrap bg-secondary p-2 my-2" style="width: 20em;">
+                <div class="row fw-bold text-center">
+                    <div class="col" th:text="#{web.champion.info.type.title}"/>
+                </div>
+                <div class="row-cols-2w">
+                    <div class="col-2" th:each="tag: ${champion.tags}" th:text="${tag}"/>
+                </div>
+            </div>
+            <div class="text-nowrap bg-secondary p-2 my-2" style="width: 20em;">
+                <div class="row fw-bold text-center">
+                    <div class="col" th:text="#{web.champion.info.stats.title}"/>
+                </div>
+                <div class="row">
+                    <div class="col" th:text="#{web.champion.info.stats.health}"/>
+                    <div class="col"
+                         th:text="#{web.champion.info.stats.value(${champion.stats.hp}, ${champion.stats.hpperlevel})}"/>
+                </div>
+                <div class="row">
+                    <div class="col" th:text="#{web.champion.info.stats.healthRegen}"/>
+                    <div class="col"
+                         th:text="#{web.champion.info.stats.value(${champion.stats.hpregen}, ${champion.stats.hpregenperlevel})}"/>
+                </div>
+                <div class="row" th:if="${champion.stats.mp + champion.stats.mpperlevel > 0}">
+                    <div class="col" th:text="#{web.champion.info.stats.mana}"/>
+                    <div class="col"
+                         th:text="#{web.champion.info.stats.value(${champion.stats.mp}, ${champion.stats.mpperlevel})}"/>
+                </div>
+                <div class="row" th:if="${champion.stats.mpregen + champion.stats.mpregenperlevel > 0}">
+                    <div class="col" th:text="#{web.champion.info.stats.manaRegen}"/>
+                    <div class="col"
+                         th:text="#{web.champion.info.stats.value(${champion.stats.mpregen}, ${champion.stats.mpregenperlevel})}"/>
+                </div>
+                <div class="row">
+                    <div class="col" th:text="#{web.champion.info.stats.armor}"/>
+                    <div class="col"
+                         th:text="#{web.champion.info.stats.value(${champion.stats.armor}, ${champion.stats.armorperlevel})}"/>
+                </div>
+                <div class="row">
+                    <div class="col" th:text="#{web.champion.info.stats.mr}"/>
+                    <div class="col"
+                         th:text="#{web.champion.info.stats.value(${champion.stats.spellblock}, ${champion.stats.spellblockperlevel})}"/>
+                </div>
+                <div class="row">
+                    <div class="col" th:text="#{web.champion.info.stats.ad}"/>
+                    <div class="col"
+                         th:text="#{web.champion.info.stats.value(${champion.stats.attackdamage}, ${champion.stats.attackdamageperlevel})}"/>
+                </div>
+                <div class="row">
+                    <div class="col" th:text="#{web.champion.info.stats.as}"/>
+                    <div class="col"
+                         th:text="#{web.champion.info.stats.value.increasePercentage(${champion.stats.attackspeed}, ${champion.stats.attackspeedperlevel})}"/>
+                </div>
+                <div class="row">
+                    <div class="col" th:text="#{web.champion.info.stats.ar}"/>
+                    <div class="col"
+                         th:text="${champion.stats.attackrange}"/>
+                </div>
+                <div class="row">
+                    <div class="col" th:text="#{web.champion.info.stats.ms}"/>
+                    <div class="col"
+                         th:text="${champion.stats.movespeed}"/>
+                </div>
+            </div>
+            <div class="text-nowrap bg-secondary p-2 my-2" style="width: 20em;">
+                <div class="row fw-bold text-center">
+                    <div class="col" th:text="#{web.champion.info.cosmetics.title}"/>
+                </div>
+                <div class="row">
+                    <div class="col" th:text="#{web.champion.info.cosmetics.skinCount}"/>
+                    <div class="col"
+                         th:text="${#lists.size(champion.skins)-1}"/>
+                </div>
+                <div class="row">
+                    <div class="col" th:text="#{web.champion.info.cosmetics.chromaCount}"/>
+                    <div class="col"
+                         th:with="filtered=${champion.skins.?[#bools.isTrue(chromas)]}"
+                         th:text="${#lists.size(filtered)}"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div th:text="${champion.lore}"/>
+            <div>
+                <h3 class="text-center mt-3" th:text="#{web.champions.allyTips}"/>
+                <div th:each="tip: ${champion.allytips}" th:text="${tip}"/>
+            </div>
+            <div>
+                <h3 class="text-center mt-3" th:text="#{web.champions.enemyTips}"/>
+                <div th:each="tip: ${champion.enemytips}" th:text="${tip}"/>
+            </div>
+        </div>
+    </div>
+    <div class="row bg-secondary me-0 px-3 py-2 mb-3">
+        <h2 class="col text-center" th:text="#{web.champion.spells.title}"/>
+        <div class="row bg-dark bg-opacity-50 mx-0 my-3 py-2">
+            <img class="col-2 col-lg-1"
+                 th:src="@{https://ddragon.leagueoflegends.com/cdn/{version}/img/passive/{passiveImgName}(version=${version},passiveImgName=${champion.passive.image.full})}">
+            <h3 class="col d-flex align-items-center" th:text="#{web.champion.spells.passive.title(${champion.passive.name})}"/>
+            <div class="col-12 py-2" th:text="${champion.passive.description.replaceAll('<[/A-z0-9]*>', '')}"/>
+        </div>
+        <div class="row bg-dark bg-opacity-50 mx-0 my-3 py-2">
+            <img class="col-2 col-lg-1"
+                 th:src="@{https://ddragon.leagueoflegends.com/cdn/{version}/img/spell/{spellImgName}(version=${version},spellImgName=${champion.spells[0].image.full})}">
+            <h3 class="col d-flex align-items-center" th:text="#{web.champion.spells.q.title(${champion.spells[0].name})}"/>
+            <div class="col-12 py-2" th:text="${champion.spells[0].description.replaceAll('<[/A-z0-9]*>', '')}"/>
+        </div>
+        <div class="row bg-dark bg-opacity-50 mx-0 my-3 py-2">
+            <img class="col-2 col-lg-1"
+                 th:src="@{https://ddragon.leagueoflegends.com/cdn/{version}/img/spell/{spellImgName}(version=${version},spellImgName=${champion.spells[1].image.full})}">
+            <h3 class="col d-flex align-items-center" th:text="#{web.champion.spells.w.title(${champion.spells[1].name})}"/>
+            <div class="col-12 py-2" th:text="${champion.spells[1].description.replaceAll('<[/A-z0-9]*>', '')}"/>
+        </div>
+        <div class="row bg-dark bg-opacity-50 mx-0 my-3 py-2">
+            <img class="col-2 col-lg-1"
+                 th:src="@{https://ddragon.leagueoflegends.com/cdn/{version}/img/spell/{spellImgName}(version=${version},spellImgName=${champion.spells[2].image.full})}">
+            <h3 class="col d-flex align-items-center" th:text="#{web.champion.spells.e.title(${champion.spells[2].name})}"/>
+            <div class="col-12 py-2" th:text="${champion.spells[2].description.replaceAll('<[/A-z0-9]*>', '')}"/>
+        </div>
+        <div class="row bg-dark bg-opacity-50 mx-0 my-3 py-2">
+            <img class="col-2 col-lg-1"
+                 th:src="@{https://ddragon.leagueoflegends.com/cdn/{version}/img/spell/{spellImgName}(version=${version},spellImgName=${champion.spells[3].image.full})}">
+            <h3 class="col d-flex align-items-center" th:text="#{web.champion.spells.r.title(${champion.spells[3].name})}"/>
+            <div class="col-12 py-2" th:text="${champion.spells[3].description.replaceAll('<[/A-z0-9]*>', '')}"/>
         </div>
     </div>
 </section>
